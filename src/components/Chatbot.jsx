@@ -63,7 +63,7 @@ const ChatBox = ({ messages, setMessages, selectedArtist, onMenuClick, onHome })
       <div className="relative z-10 flex flex-col h-full p-4 md:p-10">
 
         {/* TOP HEADER */}
-        <div className="flex items-center mb-4">
+        <div className="flex items-center mb-6">
           <button onClick={onMenuClick} className="text-[#CDD400] p-2 hover:bg-white/5 rounded-lg md:hidden">
             <Menu size={28} />
           </button>
