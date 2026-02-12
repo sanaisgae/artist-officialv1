@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import ChatBot from './components/Chatbot';
+import LandingPage from './components/LandingPage';
+import AboutPage from './components/AboutPage';
+import ContactsPage from './components/ContactsPage';
 
 function App() {
+  // Page navigation state
+  const [currentPage, setCurrentPage] = useState("landing");
+
+  // Chatbot state
   const [messages, setMessages] = useState([]);
   const [selectedArtist, setSelectedArtist] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
-  // NEW: State for mobile menu
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const saveCurrentSession = () => {
@@ -38,6 +44,28 @@ function App() {
   const clearSession = () => { setMessages([]); };
   const clearHistory = () => { setChatHistory([]); };
 
+  // --- Landing Page ---
+  if (currentPage === "landing") {
+    return (
+      <LandingPage
+        onStart={() => setCurrentPage("chatbot")}
+        onAbout={() => setCurrentPage("about")}
+        onContacts={() => setCurrentPage("contacts")}
+      />
+    );
+  }
+
+  // --- About Page ---
+  if (currentPage === "about") {
+    return <AboutPage onBack={() => setCurrentPage("landing")} />;
+  }
+
+  // --- Contacts Page ---
+  if (currentPage === "contacts") {
+    return <ContactsPage onBack={() => setCurrentPage("landing")} />;
+  }
+
+  // --- Chatbot Page (existing layout) ---
   return (
     <div className="flex h-screen w-full overflow-hidden bg-black relative">
       {/* Sidebar with mobile drawer logic */}
@@ -55,7 +83,7 @@ function App() {
           onClearSession={clearSession}
           chatHistory={chatHistory}
           onClearHistory={clearHistory}
-          onClose={() => setIsSidebarOpen(false)} // Close button for mobile
+          onClose={() => setIsSidebarOpen(false)}
         />
       </div>
 
@@ -65,7 +93,8 @@ function App() {
           messages={messages}
           setMessages={setMessages}
           selectedArtist={selectedArtist}
-          onMenuClick={() => setIsSidebarOpen(true)} // Open menu button
+          onMenuClick={() => setIsSidebarOpen(true)}
+          onHome={() => setCurrentPage("landing")}
         />
       </main>
 

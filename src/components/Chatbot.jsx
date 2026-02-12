@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Paperclip, Mic, Zap, SendHorizontal, Menu } from 'lucide-react';
+import { Paperclip, Mic, Zap, SendHorizontal, Menu, Home } from 'lucide-react';
 
 import { sendMessageToGemini } from '../services/gemini';
 
-const ChatBox = ({ messages, setMessages, selectedArtist, onMenuClick }) => {
+const ChatBox = ({ messages, setMessages, selectedArtist, onMenuClick, onHome }) => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -62,14 +62,17 @@ const ChatBox = ({ messages, setMessages, selectedArtist, onMenuClick }) => {
 
       <div className="relative z-10 flex flex-col h-full p-4 md:p-10">
 
-        {/* MOBILE MENU HEADER */}
-        <div className="flex items-center mb-4 md:hidden">
-          <button onClick={onMenuClick} className="text-[#CDD400] p-2 hover:bg-white/5 rounded-lg">
+        {/* TOP HEADER */}
+        <div className="flex items-center mb-4">
+          <button onClick={onMenuClick} className="text-[#CDD400] p-2 hover:bg-white/5 rounded-lg md:hidden">
             <Menu size={28} />
           </button>
-          <span className="ml-4 text-white/50 font-jago uppercase tracking-widest text-sm">
+          <span className="ml-4 md:ml-0 text-white/50 font-jago uppercase tracking-widest text-sm flex-1">
             {selectedArtist || "Select Artist"}
           </span>
+          <button onClick={onHome} className="text-white/40 hover:text-[#CDD400] p-2 hover:bg-white/5 rounded-lg transition-colors duration-300 cursor-pointer" title="Back to Home">
+            <Home size={24} />
+          </button>
         </div>
 
         {/* MESSAGES AREA */}
