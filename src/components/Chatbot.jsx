@@ -9,7 +9,7 @@ const ChatBox = ({ messages, setMessages, selectedArtist, onMenuClick, onHome })
 
   const artistBackgrounds = {
     "Pablo Picasso": "https://upload.wikimedia.org/wikipedia/en/7/74/PicassoGuernica.jpg",
-    "Leonardo Da Vinci": "https://upload.wikimedia.org/wikipedia/commons/f/f4/The_Scream.jpg",
+    "Leonardo Da Vinci": new URL('../assets/mona.avif', import.meta.url).href,
     "Vincent Van Gogh": "https://upload.wikimedia.org/wikipedia/commons/9/94/Starry_Night_Over_the_Rhone.jpg"
   };
 
